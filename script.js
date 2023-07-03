@@ -1,6 +1,9 @@
-const books = [];
 const form = document.querySelector('form');
 const section = document.querySelector('section');
+const books = JSON.parse(localStorage.getItem('Books'));
+function storeBooks() {
+  localStorage.setItem('Books', JSON.stringify(books));
+}
 function displayBooks() {
   section.innerHTML = '';
   const fragment = new DocumentFragment();
@@ -14,6 +17,7 @@ function displayBooks() {
     fragment.appendChild(article);
   });
   section.appendChild(fragment);
+  storeBooks();
 }
 function addBook(event) {
   event.preventDefault();
@@ -36,7 +40,6 @@ function removeBook(event) {
     }
   }
 }
-
 section.addEventListener('click', removeBook);
 form.addEventListener('submit', addBook);
 displayBooks();
