@@ -1,23 +1,6 @@
 const books = [];
 const form = document.querySelector('form');
 const section = document.querySelector('section');
-function addBook(event) {
-  event.preventDefault();
-  books.push({ id: parseInt(Math.random() * 1000), title: form.title.value, author: form.author.value });
-  displayBooks();
-  form.reset();
-}
-function removeBook(event) {
-  if (event.target.id !== '') {
-    for (let i = 0; i < books.length; i++) {
-      if (books[i].id === parseInt(event.target.id)) { 
-        books.splice(i, 1);
-        displayBooks();
-        break;
-      }
-    }
-  }
-}
 function displayBooks() {
   section.innerHTML = '';
   const fragment = new DocumentFragment();
@@ -32,6 +15,28 @@ function displayBooks() {
   });
   section.appendChild(fragment);
 }
+function addBook(event) {
+  event.preventDefault();
+  books.push({
+    id: parseInt(Math.random() * 1000, 10),
+    title: form.title.value,
+    author: form.author.value,
+  });
+  displayBooks();
+  form.reset();
+}
+function removeBook(event) {
+  if (event.target.id !== '') {
+    for (let i = 0; i < books.length; i += 1) {
+      if (books[i].id === parseInt(event.target.id, 10)) {
+        books.splice(i, 1);
+        displayBooks();
+        break;
+      }
+    }
+  }
+}
+
 section.addEventListener('click', removeBook);
 form.addEventListener('submit', addBook);
 displayBooks();
