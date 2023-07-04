@@ -22,7 +22,7 @@ function displayBooks() {
 function addBook(event) {
   event.preventDefault();
   books.push({
-    id: parseInt(Math.random() * 1000, 10),
+    id: `${Date.now()}`,
     title: form.title.value,
     author: form.author.value,
   });
@@ -32,7 +32,7 @@ function addBook(event) {
 function removeBook(event) {
   if (event.target.id !== '') {
     for (let i = 0; i < books.length; i += 1) {
-      if (books[i].id === parseInt(event.target.id, 10)) {
+      if (books[i].id === event.target.id) {
         books.splice(i, 1);
         displayBooks();
         break;
